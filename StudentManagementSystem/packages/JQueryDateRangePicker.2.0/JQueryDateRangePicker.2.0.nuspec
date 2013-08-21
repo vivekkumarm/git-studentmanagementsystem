@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>JQueryDateRangePicker</id>
+    <version>2.0</version>
+    <title>JQueryDateRangePicker</title>
+    <authors>FilamentGroup</authors>
+    <owners>FilamentGroup</owners>
+    <licenseUrl>http://filamentgroup.com/examples/mit-license.txt</licenseUrl>
+    <projectUrl>https://bitbucket.org/Betoxiq/filament-group-jquery-ui-date-range-picker/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Filament Group Lab Example From Page from: Date Range Picker using jQuery UI 1.6 and jQuery UI CSS Framework</description>
+    <summary>Filament Group Lab Example From Page from: Date Range Picker using jQuery UI 1.6 and jQuery UI CSS Framework</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>JQuery JQueryUI Datejs</tags>
+    <dependencies>
+      <dependency id="JQuery" />
+    </dependencies>
+  </metadata>
+</package>
