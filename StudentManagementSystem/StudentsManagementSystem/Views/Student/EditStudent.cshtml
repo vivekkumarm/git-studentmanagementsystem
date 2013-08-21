@@ -1,0 +1,66 @@
+﻿
+@*Added by Prasana Sri on 22.07.2013*@
+
+
+@model StudentsBO.Student
+
+@{
+    ViewBag.Title = "EditStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditStudent</h2>
+
+<div Class="right">
+    @Html.ActionLink("Back to Search", "Search")
+</div>
+
+@using (@Html.BeginForm())
+{
+    @Html.ValidationSummary();
+    @Html.LabelFor(sm=>sm.Name) 
+    @Html.TextBoxFor(sm => sm.Name)                        
+    
+    @Html.LabelFor(sm => sm.Standard) 
+    @Html.TextBoxFor(sm => sm.Standard)              
+
+    @Html.LabelFor(sm => sm.Section) 
+    @Html.TextBoxFor(sm => sm.Section)  
+    <br />
+    @Html.RadioButtonFor(sm => sm.Gender, 'M',true) @:Male
+    @Html.RadioButtonFor(sm => sm.Gender, 'F',false) @:Female
+             
+    @Html.LabelFor(sm => sm.DateOfBirth) 
+    @Html.TextBoxFor(sm => sm.DateOfBirth,new { id = "date"})         
+
+    @Html.LabelFor(sm => sm.PhoneNumber) 
+    @Html.TextBoxFor(sm => sm.PhoneNumber)              
+
+    @Html.LabelFor(sm => sm.Address) 
+    @Html.TextBoxFor(sm => sm.Address)              
+
+    @Html.HiddenFor(sm=>sm.RollNumber)
+    @Html.HiddenFor(sm=>sm.Modified_By)
+    
+   
+   <input type="submit" value="Submit"/>
+
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css")
+   
+     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#date").datepicker({
+                dateFormat:'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+}

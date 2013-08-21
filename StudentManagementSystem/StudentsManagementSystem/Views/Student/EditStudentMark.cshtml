@@ -1,0 +1,65 @@
+﻿
+
+@*Added by Prasana Sri on 22.07.2013*@
+
+
+@model StudentsBO.StudentMark
+@{
+    ViewBag.Title = "EditeStudentMark";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditeStudentMark</h2>
+<div Class="right">
+    @Html.ActionLink("Back to Search", "Search")
+</div>
+
+@using (@Html.BeginForm())
+{
+    @Html.ValidationSummary();
+    @Html.LabelFor(sm=>sm.Language) 
+    @Html.TextBoxFor(sm => sm.Language, new { id = "txtLanguage",@onchange="javascript:Getvalue(this.value);" })                        
+    
+    @Html.LabelFor(sm => sm.English) 
+    @Html.TextBoxFor(sm => sm.English, new { id = "txtEnglish",@onchange="javascript:Getvalue(this.value);" })              
+
+    @Html.LabelFor(sm => sm.Science) 
+    @Html.TextBoxFor(sm => sm.Science, new { id = "txtScience",@onchange="javascript:Getvalue(this.value);"  })  
+            
+    @Html.LabelFor(sm => sm.Social) 
+    @Html.TextBoxFor(sm => sm.Social, new { id = "txtSocial", @onchange="javascript:Getvalue(this.value);"  }) 
+             
+    @Html.LabelFor(sm => sm.Maths) 
+    @Html.TextBoxFor(sm => sm.Maths, new { id = "txtMaths",@onchange="javascript:Getvalue(this.value);"  })         
+
+    @Html.LabelFor(sm => sm.Total) 
+    @Html.TextBoxFor(sm => sm.Total,new { id = "txtTotal",@readonly="readonly"})      
+    
+    @Html.LabelFor(sm => sm.Result) 
+    @Html.TextBoxFor(sm => sm.Result,new { id = "txtResult",@readonly="readonly"})           
+
+    @Html.LabelFor(sm => sm.Percentage) 
+    @Html.TextBoxFor(sm => sm.Percentage, new { id = "txtPercentage",@readonly="readonly" })        
+    
+    @Html.LabelFor(sm => sm.Remarks) 
+    @Html.TextBoxFor(sm => sm.Remarks)          
+
+         
+    
+   <input type="submit" value="Submit" />
+
+}
+
+@Html.ActionLink("Go back","Search","Student")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        function Getvalue(marks) {
+            alert(marks);
+        }
+    </script>
+
+}
+
+

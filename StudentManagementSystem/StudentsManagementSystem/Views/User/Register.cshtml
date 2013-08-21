@@ -1,0 +1,51 @@
+﻿@*Added by vivek on 19.07.2013*@
+
+@model StudentsBO.User
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPageforLogin.cshtml";
+}
+
+<h2>Register</h2>
+
+@using (Html.BeginForm())
+{
+    
+    
+    @Html.LabelFor(re=>re.UserName)
+    @Html.TextBoxFor(re=>re.UserName)
+    @Html.ValidationMessageFor(re=>re.UserName)
+    <div id="result"></div>
+
+    @Html.LabelFor(re=>re.Password)
+    @Html.PasswordFor(re=>re.Password)
+    @Html.ValidationMessageFor(re=>re.Password)
+
+    @Html.LabelFor(re=>re.ConfirmPassword)
+    @Html.PasswordFor(re=>re.ConfirmPassword)
+    @Html.ValidationMessageFor(re=>re.ConfirmPassword)
+
+    <input type="submit" value="Register" />
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+         $('#UserName').blur(function () {
+             var url = "/User/UserAvailablity";
+             var name = $('#UserName').val();
+             $.get(url, { input: name }, function (data) {
+                 if (data == "Available") {
+                     $("#result").html("<div style='color:red'>Not Available</div>");
+                     $("#UserName").css('background-color', '');
+                 }
+                 else {
+                     $("#result").html("<div style='color:green'> Available</div>");
+                     $("#UserName").css('background-color', '');
+                 }
+             });
+         })
+    </script>
+
+}

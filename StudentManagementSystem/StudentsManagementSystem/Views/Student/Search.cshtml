@@ -1,0 +1,101 @@
+﻿@*Added by Vivek on 22.07.2013*@
+
+@using GridMvc.Html;
+@model IEnumerable<StudentsBO.DataSeachResults.StudentDSR>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+<div class="right">
+    @Html.ActionLink("Register a new Student", "AddStudent")
+</div>
+
+<form method="post">
+    <label>Student Name</label>
+    <input type="search" name="Student_Name" />
+    <label>Roll Number</label>
+    <input type="search" name="Role_Number" />
+    <label>Result</label>
+    <input type="search" name="Result" />
+    <label>Standard</label>
+    <input type="search" name="Standard" />
+    <input type="submit" name="Search" />
+</form>
+
+@helper GridManageItemColumn(int id)
+{
+    @Html.ActionLink("View", "ViewStudent", "Student", new { Id = id }, null)
+    <span>|</span>
+    @Html.ActionLink("Delete", "Delete", new { Id = id })
+    <span>|</span>
+    @Html.ActionLink("Edit", "EditStudent", "Student", new { Id = id }, null)
+}
+
+<div id="GridRow" style="width: 1000px;">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.student_name).Titled("Student Name");
+    columns.Add(c => c.standard).Titled("Standard");
+    columns.Add().Titled("Language")
+        .Encoded(false)
+        .Sanitized(false)
+        .RenderValueAs(o => StudentMarkResult(o, "Language"));
+    columns.Add().Titled("English")
+        .Encoded(false)
+        .Sanitized(false)
+        .RenderValueAs(o => StudentMarkResult(o, "English"));
+    columns.Add().Titled("Maths")
+        .Encoded(false)
+        .Sanitized(false)
+        .RenderValueAs(o => StudentMarkResult(o, "Maths"));
+    columns.Add().Titled("Science")
+        .Encoded(false)
+        .Sanitized(false)
+        .RenderValueAs(o => StudentMarkResult(o, "Science"));
+    columns.Add().Titled("Social")
+        .Encoded(false)
+        .Sanitized(false)
+        .RenderValueAs(o => StudentMarkResult(o, "Social"));
+    columns.Add(c => c.total).Titled("Total");
+    columns.Add().Titled("Result")
+        .Encoded(false)
+        .Sanitized(false)
+        
+        
+        
+        
+        .RenderValueAs(o => StudentMarkResult(o, "Result"));
+    columns.Add(c => c.roll_number).Titled("Action")
+       .Sanitized(false)
+       .Encoded(false)
+       .RenderValueAs(g => GridManageItemColumn(g.roll_number).ToHtmlString());
+}).WithPaging(5).Sortable(true)
+</div>
+
+@helper StudentMarkResult(StudentsBO.DataSeachResults.StudentDSR studentDsr, string lang)
+{
+    switch (lang)
+    {
+        case "Language":
+            <text> <span style= "color: @(studentDsr.language < 35 ? "red;font-weight:bold" : string.Empty)">@studentDsr.language </span></text>
+            break;
+        case "English":
+            <text><span style="color: @(studentDsr.english < 35 ? "red;font-weight:bold" : string.Empty)">@studentDsr.english</span></text>
+            break;
+        case "Maths":
+            <text><span style="color: @(studentDsr.maths < 35 ? "red;font-weight:bold" : string.Empty)">@studentDsr.maths</span></text>
+            break;
+        case "Science":
+            <text><span style="color: @(studentDsr.science < 35 ? "red;font-weight:bold" : string.Empty)">@studentDsr.science</span></text>
+            break;
+        case "Social":
+            <text><span style="color: @(studentDsr.social < 35 ? "red;font-weight:bold" : string.Empty)">@studentDsr.social</span></text>
+            break;
+        case "Result":
+            <text><span style="color: @(studentDsr.result == 'F' ? "red;font-weight:bold" : string.Empty)">@studentDsr.result</span></text>
+            break;
+    }
+}

@@ -1,0 +1,91 @@
+﻿
+@*Added by Prasana Sri on 18.07.2013*@
+
+@model StudentsBO.StudentMark
+@{
+    ViewBag.Title = "AddStudentMark";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddStudentMark</h2>
+
+
+@using (Html.BeginForm())
+{
+  
+    @Html.LabelFor(sm => sm.Language) 
+    @Html.TextBoxFor(sm => sm.Language, new { id = "txtLanguage", @onchange = "javascript:Getvalue(this.value);" })                        
+        @Html.ValidationMessageFor(sm => sm.Language)
+    
+    @Html.LabelFor(sm => sm.English) 
+    @Html.TextBoxFor(sm => sm.English, new { id = "txtEnglish", @onchange = "javascript:Getvalue(this.value);" })              
+        @Html.ValidationMessageFor(sm => sm.English)
+
+     @Html.LabelFor(sm => sm.Maths) 
+    @Html.TextBoxFor(sm => sm.Maths, new { id = "txtMaths", @onchange = "javascript:Getvalue(this.value);" })         
+        @Html.ValidationMessageFor(sm => sm.Maths)
+    
+    @Html.LabelFor(sm => sm.Science) 
+    @Html.TextBoxFor(sm => sm.Science, new { id = "txtScience", @onchange = "javascript:Getvalue(this.value);" })  
+        @Html.ValidationMessageFor(sm => sm.Science)
+            
+    @Html.LabelFor(sm => sm.Social) 
+    @Html.TextBoxFor(sm => sm.Social, new { id = "txtSocial", @onchange = "javascript:Getvalue(this.value);" }) 
+        @Html.ValidationMessageFor(sm => sm.Social)
+             
+   
+    @Html.LabelFor(sm => sm.Total) 
+    @Html.TextBoxFor(sm => sm.Total, new { id = "txtTotal", @readonly = "readonly" })      
+        @Html.ValidationMessageFor(sm => sm.Total)
+    
+    @Html.LabelFor(sm => sm.Result) 
+    @Html.TextBoxFor(sm => sm.Result, new { id = "txtResult", @readonly = "readonly" })           
+        @Html.ValidationMessageFor(sm => sm.Result)
+
+    @Html.LabelFor(sm => sm.Percentage) 
+    @Html.TextBoxFor(sm => sm.Percentage, new { id = "txtPercentage", @readonly = "readonly" })        
+    
+    @Html.LabelFor(sm => sm.Remarks) 
+    @Html.TextBoxFor(sm => sm.Remarks)          
+
+   <input type="submit" value="Submit" />
+
+}
+
+@*Added by Prasana Sri on 19.07.2013*@
+
+
+@*Error Message Display*@
+
+    @ViewData["Message1"]
+    @ViewData["Message"]
+
+
+@*Added by Prasana Sri on 19.07.2013*@
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        
+        function Getvalue(marks) {
+            var lan = document.getElementById("txtLanguage").value;
+            var eng = document.getElementById("txtEnglish").value;
+            var mat = document.getElementById("txtMaths").value;
+            var sci = document.getElementById("txtScience").value;
+            var soc = document.getElementById("txtSocial").value;
+            //document.getElementById("txtTotal").value = lan + eng + mat + sci + soc;
+            var total =parseInt(lan) +parseInt(eng) +parseInt(mat) +parseInt(sci) +parseInt(soc);
+            document.getElementById("txtTotal").value = total;
+            if ((lan < 35) || (eng< 35) || (sci< 35) || (soc< 35) || (mat< 35)) {
+                document.getElementById("txtResult").value = "F";
+            }
+            else {
+                document.getElementById("txtResult").value = "P";
+            }
+            var percentage = total/ 500 * 100;
+            document.getElementById("txtPercentage").value = percentage;
+        }
+    </script>
+   
+}

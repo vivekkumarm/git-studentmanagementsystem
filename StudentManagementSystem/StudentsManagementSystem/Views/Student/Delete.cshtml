@@ -1,0 +1,45 @@
+﻿@model StudentsBO.DataSeachResults.StudentDSR
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    @Html.LabelFor(stu=>stu.roll_number)
+    @Html.TextBoxFor(stu => stu.roll_number, new { @readonly="readonly"})
+    
+    @Html.LabelFor(stu=>stu.student_name)
+    @Html.TextBoxFor(stu => stu.student_name, new { @readonly="readonly"})
+
+    @Html.LabelFor(stu=>stu.standard)
+    @Html.TextBoxFor(stu => stu.standard, new { @readonly="readonly"})
+
+    @Html.LabelFor(stu=>stu.language)
+    @Html.TextBoxFor(stu => stu.language, new { @readonly="readonly"})
+
+    @Html.LabelFor(stu=>stu.english)
+    @Html.TextBoxFor(stu => stu.english, new { @readonly="readonly"})
+
+    @Html.LabelFor(stu=>stu.maths)
+    @Html.TextBoxFor(stu => stu.maths, new { @readonly="readonly"})
+
+    @Html.LabelFor(stu=>stu.science)
+    @Html.TextBoxFor(stu => stu.science, new { @readonly="readonly"})
+
+    @Html.LabelFor(stu=>stu.social)
+    @Html.TextBoxFor(stu => stu.social, new { @readonly="readonly"})
+
+    @Html.LabelFor(stu=>stu.total)
+    @Html.TextBoxFor(stu => stu.total, new { @readonly="readonly"})
+
+    @Html.LabelFor(stu=>stu.result)
+    @Html.TextBoxFor(stu => stu.result, new { @readonly="readonly"})
+
+    
+    <input type="submit" value="Delete" />
+}

@@ -1,0 +1,113 @@
+﻿@*Added by Yogalakshmi on 19.07.2013*@
+
+@using System.Drawing
+@using System.Globalization
+@using System.Web.Razor.Parser
+@using GridMvc.Html;
+@using WebGrease.Css.Extensions
+@model StudentsBO.Student
+@{
+    ViewBag.Title = "ViewStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewStudent</h2>
+
+
+@using (@Html.BeginForm())
+{
+    if (Model.Name != null && Model.RollNumber != 0 && Model.Standard != null && Model.Section != null && Model.Gender != null && Model.DateOfBirth != null &&
+        Model.PhoneNumber != null && Model.Address != null)
+    {
+        @Html.LabelFor(sm => sm.Name)
+        @Html.TextBoxFor(sm => sm.Name, new {@readonly="readonly" })
+
+        @Html.LabelFor(sm => sm.RollNumber)
+        @Html.TextBoxFor(sm => sm.RollNumber, new {@readonly="readonly" })
+
+        @Html.LabelFor(sm => sm.Standard)
+    @Html.TextBoxFor(sm => sm.Standard, new {@readonly="readonly" })
+
+        @Html.LabelFor(sm => sm.Section)
+        @Html.TextBoxFor(sm => sm.Section, new {@readonly="readonly" })
+
+        @Html.LabelFor(sm => sm.Gender)
+        @Html.TextBoxFor(sm => sm.Gender, new {@readonly="readonly" })
+
+
+        @Html.LabelFor(sm => sm.DateOfBirth)
+        @Html.TextBoxFor(sm => sm.DateOfBirth, new {@readonly="readonly" })
+
+        @Html.LabelFor(sm => sm.PhoneNumber)
+@Html.TextBoxFor(sm => sm.PhoneNumber, new {@readonly="readonly" })
+
+        @Html.LabelFor(sm => sm.Address)
+     @Html.TextBoxFor(sm => sm.Address, new {@readonly="readonly" })
+    }
+    <div>
+        @Html.Grid(Model.StudentMarks).Columns(columns =>
+        {
+            columns.Add().Titled("Language")
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(o => StudentMarkResult(o, "Language"));
+            columns.Add().Titled("English")
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(o => StudentMarkResult(o, "English"));
+            columns.Add().Titled("Maths")
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(o => StudentMarkResult(o, "Maths"));
+            columns.Add().Titled("Science")
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(o => StudentMarkResult(o, "Science"));
+            columns.Add().Titled("Social")
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(o => StudentMarkResult(o, "Social"));
+            columns.Add(c => c.Total).Titled("Total");
+            columns.Add(c => c.Percentage).Titled("Percentage");
+            columns.Add().Titled("Result")
+                .Encoded(false)
+                .Sanitized(false)
+                .RenderValueAs(o => StudentMarkResult(o, "Result"));
+        }).WithPaging(5).Sortable(true)
+    </div>
+
+
+}
+@Html.ActionLink("Go back","Search","Student")
+    @helper StudentMarkResult(StudentsBO.StudentMark studentMark, string lang)
+    {
+        switch (lang)
+        {
+            case "Language":
+                <text> <span style= "color: @(studentMark.Language < 35 ? "red;font-weight:bold" : string.Empty)">@studentMark.Language </span></text>
+                break;
+            case "English":
+                <text><span style="color: @(studentMark.English < 35 ? "red;font-weight:bold" : string.Empty)">@studentMark.English</span></text>
+                break;
+            case "Maths":
+                <text><span style="color: @(studentMark.Maths < 35 ? "red;font-weight:bold" : string.Empty)">@studentMark.Maths</span></text>
+                break;
+            case "Science":
+                <text><span style="color: @(studentMark.Science < 35 ? "red;font-weight:bold" : string.Empty)">@studentMark.Science</span></text>
+                break;
+            case "Social":
+                <text><span style="color: @(studentMark.Social < 35 ? "red;font-weight:bold" : string.Empty)">@studentMark.Social</span></text>
+                break;
+            case "Result":
+                <text><span style="color: @(studentMark.Result == 'F' ? "red;font-weight:bold" : string.Empty)">@studentMark.Result</span></text>
+                break;
+        }
+
+    }
+
+
+
+
+
+
+

@@ -1,0 +1,77 @@
+﻿
+@*Added by Prasana Sri on 18.07.2013*@
+@model StudentsBO.Student
+
+@{
+    ViewBag.Title = "AddStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddStudent</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(sm => sm.Name) 
+    @Html.TextBoxFor(sm => sm.Name)
+    @Html.ValidationMessageFor(sm => sm.Name)
+    
+    @Html.LabelFor(sm => sm.Standard) 
+    @Html.TextBoxFor(sm => sm.Standard,new{placeholder="Ex: VI"})              
+        @Html.ValidationMessageFor(sm => sm.Standard)
+
+    @Html.LabelFor(sm => sm.Section) 
+    @Html.TextBoxFor(sm => sm.Section) 
+        @Html.ValidationMessageFor(sm => sm.Section)
+     <br />
+
+    @Html.LabelFor(sm=>sm.Gender)
+    @Html.RadioButtonFor(sm => sm.Gender, 'M', true) @:Male
+    @Html.RadioButtonFor(sm => sm.Gender, 'F', false) @:Female
+        @Html.ValidationMessageFor(sm => sm.Gender)
+             
+    @Html.LabelFor(sm => sm.DateOfBirth) 
+    @Html.TextBoxFor(sm => sm.DateOfBirth,
+            new {placeholder="Ex:12/09/1999",id="date"})    
+        @Html.ValidationMessageFor(sm => sm.DateOfBirth)     
+
+    @Html.LabelFor(sm => sm.PhoneNumber) 
+    @Html.TextBoxFor(sm => sm.PhoneNumber)             
+        @Html.ValidationMessageFor(sm => sm.PhoneNumber) 
+
+    @Html.LabelFor(sm => sm.Address) 
+    @Html.TextBoxFor(sm => sm.Address)              
+    @Html.ValidationMessageFor(sm => sm.Address)
+   <input type="submit" value="Submit"/>
+}
+
+
+
+
+@*Added by Prasana Sri on 19.07.2013*@
+
+@section Scripts
+{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css")
+   
+     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#date").datepicker({
+                dateFormat: 'dd/mm/yy',
+                maxDate: '1m +1w +1d',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+}
+
+@*Added by Prasana Sri on 19.07.2013*@
+
+@*Error Message Display*@
+
+    @ViewData["Message1"]
+    @ViewData["Message"]
