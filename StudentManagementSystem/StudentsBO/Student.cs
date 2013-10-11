@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 #endregion
 
 #region Student Class
@@ -27,6 +28,7 @@ namespace StudentsBO
         /// The roll number.
         /// </value>
         /// ^[0-9]*$
+        
         [Display(Name = "Roll Number")]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "Only Number")]
         [Required(ErrorMessage = "Register Number Required")]
